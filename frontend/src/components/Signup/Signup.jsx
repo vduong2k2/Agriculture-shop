@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
@@ -7,7 +7,7 @@ import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
 
-const Signup = () => {
+const Singup = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +18,7 @@ const Signup = () => {
     const file = e.target.files[0];
     setAvatar(file);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -32,16 +33,14 @@ const Signup = () => {
     axios
       .post(`${server}/user/create-user`, newForm, config)
       .then((res) => {
-        alert(res.message);
-
-        // toast.success(res.data.message);
-        // setName("");
-        // setEmail("");
-        // setPassword("");
-        // setAvatar();
+        toast.success(res.data.message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setAvatar();
       })
       .catch((error) => {
-        toast.error("error");
+        toast.error(error.response.data.message);
       });
   };
 
@@ -74,6 +73,7 @@ const Signup = () => {
                 />
               </div>
             </div>
+
             <div>
               <label
                 htmlFor="email"
@@ -93,6 +93,7 @@ const Signup = () => {
                 />
               </div>
             </div>
+
             <div>
               <label
                 htmlFor="password"
@@ -125,6 +126,7 @@ const Signup = () => {
                 )}
               </div>
             </div>
+
             <div>
               <label
                 htmlFor="avatar"
@@ -158,6 +160,7 @@ const Signup = () => {
                 </label>
               </div>
             </div>
+
             <div>
               <button
                 type="submit"
@@ -169,7 +172,7 @@ const Signup = () => {
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Already have an account?</h4>
               <Link to="/login" className="text-blue-600 pl-2">
-                Sign in
+                Sign In
               </Link>
             </div>
           </form>
@@ -179,4 +182,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Singup;

@@ -4,9 +4,12 @@ const User = require("../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
 const ErrorHandler = require("../utils/ErrorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
+const sendToken = require("../utils/jwtToken");
+const { isAuthenticated } = require("../middleware/auth");
 const user = require("../model/user");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
@@ -46,10 +49,10 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
         subject: "Activate your account",
         message: `Hello ${user.name}, please click on the link to activate your account: ${activationUrl}`,
       });
-      //   res.status(201).json({
-      //     success: true,
-      //     message: `please check your email:- ${user.email} to activate your account!`,
-      //   });
+      res.status(201).json({
+        success: true,
+        message: `please check your email:- ${user.email} to activate your account!`,
+      });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -57,12 +60,14 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     return next(new ErrorHandler(error.message, 400));
   }
 });
+
 // create activation token
 const createActivationToken = (user) => {
   return jwt.sign(user, process.env.ACTIVATION_SECRET, {
     expiresIn: "5m",
   });
 };
+
 // activate user
 router.post(
   "/activation",
