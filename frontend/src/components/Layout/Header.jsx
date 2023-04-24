@@ -82,7 +82,7 @@ const Header = ({ activeHeading }) => {
                       <Link to={`/product/${Product_name}`}>
                         <div className="w-full flex items-start-py-3">
                           <img
-                            src={i.images_Url[0].url}
+                            src={i.image_Url[0].url}
                             alt=""
                             className="w-[40px] h-[40px] mr-[10px]"
                           />
