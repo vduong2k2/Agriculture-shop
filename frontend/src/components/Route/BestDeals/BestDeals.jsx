@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { productData } from "../../../static/data";
 import styles from "../../../styles/styles";
 import ProductCard from "../ProductCard/ProductCard.jsx";
 const BestDeals = () => {
   const [data, setData] = useState([]);
-  useEffect(() => {
-    const d = productData.sort((a, b) => b.total_sell - a.total_sell);
-    const firstFive = d.slice(0, 5);
+  const d = productData.sort((a, b) => b.total_sell - a.total_sell);
+  const firstFive = d.slice(0, 5);
+
+  const fetchDeals = useCallback(() => {
+    // ... Lấy danh sách giao dịch
     setData(firstFive);
-  });
+  }, []);
+  useEffect(() => {
+    fetchDeals();
+  }, [fetchDeals]);
 
   return (
     <div>
