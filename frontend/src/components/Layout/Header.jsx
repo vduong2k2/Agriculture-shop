@@ -31,11 +31,9 @@ const Header = ({ activeHeading }) => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    const filteredProducts =
-      productData &&
-      productData.filter((product) =>
-        product.name.toLowerCase().includes(term.toLowerCase())
-      );
+    const filteredProducts = productData.filter((product) =>
+      product.name.toLowerCase().includes(term.toLowerCase())
+    );
     setSearchData(filteredProducts);
   };
 
@@ -79,7 +77,7 @@ const Header = ({ activeHeading }) => {
                     const d = i.name;
                     const Product_name = d.replace(/\s+/g, "-");
                     return (
-                      <Link to={`/product/${Product_name}`}>
+                      <Link key={index} to={`/product/${Product_name}`}>
                         <div className="w-full flex items-start-py-3">
                           <img
                             src={i.image_Url[0].url}
@@ -115,7 +113,7 @@ const Header = ({ activeHeading }) => {
             <div>
               <div
                 className={
-                  "relative h-[60px] mt-[10px] 2-[270px] hidden 1000px:block"
+                  "relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block"
                 }
               >
                 <BiMenuAltLeft
