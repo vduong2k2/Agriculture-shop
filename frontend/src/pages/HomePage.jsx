@@ -3,8 +3,11 @@ import Header from "../components/Layout/Header.jsx";
 import Hero from "../components/Route/Hero/Hero.jsx";
 import Categories from "../components/Route/Categories/Categories.jsx";
 import BestDeals from "../components/Route/BestDeals/BestDeals.jsx";
-import FeaturedProduct from "../components/FeaturedProduct/FeaturedProduct.jsx"
-import Events from "../components/Events/Events.jsx"
+import FeaturedProduct from "../components/FeaturedProduct/FeaturedProduct.jsx";
+import Events from "../components/Events/Events.jsx";
+import Sponsored from "../components/Route/Sponsored.jsx";
+import Footer from "../components/Layout/Footer.jsx";
+
 const HomePage = () => {
   return (
     <div>
@@ -14,6 +17,8 @@ const HomePage = () => {
       <BestDeals />
       <Events />
       <FeaturedProduct />
+      <Sponsored />
+      <Footer />
     </div>
   );
 };

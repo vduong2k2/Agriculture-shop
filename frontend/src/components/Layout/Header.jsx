@@ -12,9 +12,10 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
 import { CgProfile } from "react-icons/cg";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { backend_url } from "../../server";
 const Header = ({ activeHeading }) => {
-  // const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   // const { isSeller } = useSelector((state) => state.seller);
   // const { wishlist } = useSelector((state) => state.wishlist);
   // const { cart } = useSelector((state) => state.cart);
@@ -23,7 +24,7 @@ const Header = ({ activeHeading }) => {
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-  
+
   // const [openCart, setOpenCart] = useState(false);
   // const [openWishlist, setOpenWishlist] = useState(false);
   // const [open, setOpen] = useState(false);
@@ -173,9 +174,19 @@ const Header = ({ activeHeading }) => {
               </div>
               <div className={`${styles.noramlFlex}`}>
                 <div className="relative cursor-pointer mr-[15px]">
-                  <Link to="/login">
-                    <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
-                  </Link>
+                  {isAuthenticated ? (
+                    <Link to="/profile">
+                      <img
+                        src={`${backend_url}${user.avatar}`}
+                        className="w-[35px] h-[35px] rounded-full"
+                        alt=""
+                      />
+                    </Link>
+                  ) : (
+                    <Link to="/login">
+                      <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
