@@ -23,7 +23,7 @@ const Header = ({ activeHeading }) => {
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-
+  
   // const [openCart, setOpenCart] = useState(false);
   // const [openWishlist, setOpenWishlist] = useState(false);
   // const [open, setOpen] = useState(false);
