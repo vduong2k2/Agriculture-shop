@@ -1,11 +1,22 @@
 import React, { useEffect } from "react";
 import "./App.css";
+<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+=======
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
+>>>>>>> nqkha
 import {
   LoginPage,
   SignupPage,
   ActivationPage,
   HomePage,
+<<<<<<< HEAD
   ProductsPage,
   BestSellingPage,
   EventsPage,
@@ -15,10 +26,16 @@ import {
   PaymentPage,
   OrderSuccessPage,
   ProfilePage,
+=======
+  ShopCreatePage,
+  SellerActivationPage,
+  ShopLoginPage,
+>>>>>>> nqkha
 } from "./Routes.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Store from "./redux/store";
+<<<<<<< HEAD
 import { loadUser } from "./redux/actions/user";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute";
@@ -31,6 +48,22 @@ const App = () => {
   return (
     <>
       {loading ? null : (
+=======
+import { loadSeller, loadUser } from "./redux/actions/user";
+import { useSelector } from "react-redux";
+import { ShopHomePage } from "./ShopRoutes.js";
+///
+const App = () => {
+  const { loading, isAuthenticated } = useSelector((state) => state.user);
+  const { isLoading, seller, isSeller } = useSelector((state) => state.user);
+  useEffect(() => {
+    Store.dispatch(loadUser());
+    Store.dispatch(loadSeller());
+  }, []);
+  return (
+    <>
+      {loading || isLoading ? null : (
+>>>>>>> nqkha
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -40,6 +73,7 @@ const App = () => {
               path="/activation/:activation_token"
               element={<ActivationPage />}
             />
+<<<<<<< HEAD
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/product/:name" element={<ProductDetailsPage />} />
             <Route path="/best-selling" element={<BestSellingPage />} />
@@ -56,6 +90,14 @@ const App = () => {
                   <ProfilePage />
                 </ProtectedRoute>
               }
+=======
+            <Route path="/shop-create" element={<ShopCreatePage />} />
+            <Route path="/shop-login" element={<ShopLoginPage />} />
+            <Route path="/shop/:id" element={<ShopHomePage />} />
+            <Route
+              path="/seller/activation/:activation_token"
+              element={<SellerActivationPage />}
+>>>>>>> nqkha
             />
           </Routes>
           <ToastContainer
