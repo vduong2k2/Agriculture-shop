@@ -27,11 +27,7 @@ const Login = () => {
       .then((res) => {
         toast.success("Login Success!");
         navigate("/");
-<<<<<<< HEAD
-        window.location.reload(true);
-=======
         window.location.reload(true); 
->>>>>>> origin/nqkha
       })
       .catch((err) => {
         toast.error(err.response.data.message);

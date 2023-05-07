@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-const Payment = () => {
-  return <div>Payment</div>;
-=======
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
@@ -439,7 +433,6 @@ const CartData = ({ orderData }) => {
       <br />
     </div>
   );
->>>>>>> origin/nqkha
 };
 
 export default Payment;

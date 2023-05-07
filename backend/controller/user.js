@@ -156,18 +156,11 @@ router.get(
     }
   })
 );
-<<<<<<< HEAD
-// log out user
-router.get(
-  "/logout",
-  isAuthenticated, catchAsyncErrors(async (req, res, next) => {
-=======
 
 // log out user
 router.get(
   "/logout",
   catchAsyncErrors(async (req, res, next) => {
->>>>>>> origin/nqkha
     try {
       res.cookie("token", null, {
         expires: new Date(Date.now()),
@@ -182,8 +175,6 @@ router.get(
     }
   })
 );
-<<<<<<< HEAD
-=======
 
 // update user info
 router.put(
@@ -418,5 +409,4 @@ router.delete(
   })
 );
 
->>>>>>> origin/nqkha
 module.exports = router;

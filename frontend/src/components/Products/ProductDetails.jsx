@@ -1,19 +1,10 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "../../styles/styles";
-=======
 import React, { useEffect, useState } from "react";
->>>>>>> origin/nqkha
 import {
   AiFillHeart,
   AiOutlineHeart,
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-<<<<<<< HEAD
-const ProductDetails = ({ data }) => {
-=======
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
@@ -33,13 +24,10 @@ const ProductDetails = ({ data }) => {
   const { cart } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const { products } = useSelector((state) => state.products);
->>>>>>> origin/nqkha
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProductsShop(data && data?.shop._id));
@@ -49,7 +37,6 @@ const ProductDetails = ({ data }) => {
       setClick(false);
     }
   }, [data, wishlist]);
->>>>>>> origin/nqkha
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -61,30 +48,6 @@ const ProductDetails = ({ data }) => {
     }
   };
 
-<<<<<<< HEAD
-  const handleMessageSubmit = async () => {
-    // if (isAuthenticated) {
-    //   const groupTitle = data._id + user._id;
-    //   const userId = user._id;
-    //   const sellerId = data.shop._id;
-    //   await axios
-    //     .post(`${server}/conversation/create-new-conversation`, {
-    //       groupTitle,
-    //       userId,
-    //       sellerId,
-    //     })
-    //     .then((res) => {
-    //       navigate(`/inbox?${res.data.conversation._id}`);
-    //     })
-    //     .catch((error) => {
-    //       toast.error(error.response.data.message);
-    //     });
-    // } else {
-    //   toast.error("Please login to create a conversation");
-    // }
-    navigate("/inbox?conversation=507ebjver884ehfdjeriv84");
-  };
-=======
   const removeFromWishlistHandler = (data) => {
     setClick(!click);
     dispatch(removeFromWishlist(data));
@@ -149,7 +112,6 @@ const ProductDetails = ({ data }) => {
     }
   };
 
->>>>>>> origin/nqkha
   return (
     <div className="bg-white">
       {data ? (
@@ -157,37 +119,6 @@ const ProductDetails = ({ data }) => {
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-<<<<<<< HEAD
-                <img src={data.image_Url[select].url} alt="" />
-                <div className="w-full flex">
-                  <div
-                    className={`${
-                      select === 0 ? "border" : "null"
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.image_Url[0].url}
-                      alt=""
-                      className="h-[200px]"
-                      onClick={() => setSelect(0)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      select === 0 ? "border" : "null"
-                    } cursor-pointer`}
-                  >
-                    <img
-                      src={data?.image_Url[1].url}
-                      alt=""
-                      className="h-[200px]"
-                      onClick={() => setSelect(1)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="w-full 800px:w-[50%]">
-=======
                 <img
                   src={`${backend_url}${data && data.images[select]}`}
                   alt=""
@@ -217,19 +148,10 @@ const ProductDetails = ({ data }) => {
                 </div>
               </div>
               <div className="w-full 800px:w-[50%] pt-5">
->>>>>>> origin/nqkha
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
                 <p>{data.description}</p>
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-<<<<<<< HEAD
-                    {data.discount_price}$
-                  </h4>
-                  <h3 className={`${styles.price}`}>
-                    {data.price ? data.price + "$" : null}
-                  </h3>
-                </div>
-=======
                     {data.discountPrice}$
                   </h4>
                   <h3 className={`${styles.price}`}>
@@ -237,7 +159,6 @@ const ProductDetails = ({ data }) => {
                   </h3>
                 </div>
 
->>>>>>> origin/nqkha
                 <div className="flex items-center mt-12 justify-between pr-3">
                   <div>
                     <button
@@ -261,12 +182,7 @@ const ProductDetails = ({ data }) => {
                       <AiFillHeart
                         size={30}
                         className="cursor-pointer"
-<<<<<<< HEAD
-                        //   onClick={() => removeFromWishlistHandler(data)}
-                        onClick={() => setClick(!click)}
-=======
                         onClick={() => removeFromWishlistHandler(data)}
->>>>>>> origin/nqkha
                         color={click ? "red" : "#333"}
                         title="Remove from wishlist"
                       />
@@ -274,13 +190,8 @@ const ProductDetails = ({ data }) => {
                       <AiOutlineHeart
                         size={30}
                         className="cursor-pointer"
-<<<<<<< HEAD
-                        // onClick={() => addToWishlistHandler(data)}
-                        onClick={() => setClick(!click)}
-=======
                         onClick={() => addToWishlistHandler(data)}
                         color={click ? "red" : "#333"}
->>>>>>> origin/nqkha
                         title="Add to wishlist"
                       />
                     )}
@@ -288,34 +199,13 @@ const ProductDetails = ({ data }) => {
                 </div>
                 <div
                   className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
-<<<<<<< HEAD
-                  //   onClick={() => addToCartHandler(data._id)}
-=======
                   onClick={() => addToCartHandler(data._id)}
->>>>>>> origin/nqkha
                 >
                   <span className="text-white flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
-<<<<<<< HEAD
-                  <img
-                    src={data.shop.shop_avatar.url}
-                    alt=""
-                    className="w-[50px] h-[50px] rounded-full mr-2"
-                  />
-                  <div className="pr-8">
-                    <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                      {data.shop.name}
-                    </h3>
-                    <h5 className="pb-3 text-[15px]">
-                      ({data.shop.ratings}) Ratings
-                    </h5>
-                  </div>
-                  <div
-                    className={`${styles.button} bg-[#6443d1 mt-1 !rounded !h-11] `}
-=======
                   <Link to={`/shop/preview/${data?.shop._id}`}>
                     <img
                       src={`${backend_url}${data?.shop?.avatar}`}
@@ -335,7 +225,6 @@ const ProductDetails = ({ data }) => {
                   </div>
                   <div
                     className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
->>>>>>> origin/nqkha
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
@@ -348,15 +237,9 @@ const ProductDetails = ({ data }) => {
           </div>
           <ProductDetailsInfo
             data={data}
-<<<<<<< HEAD
-            // products={products}
-            // totalReviewsLength={totalReviewsLength}
-            // averageRating={averageRating}
-=======
             products={products}
             totalReviewsLength={totalReviewsLength}
             averageRating={averageRating}
->>>>>>> origin/nqkha
           />
           <br />
           <br />
@@ -365,10 +248,6 @@ const ProductDetails = ({ data }) => {
     </div>
   );
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/nqkha
 const ProductDetailsInfo = ({
   data,
   products,
@@ -376,10 +255,6 @@ const ProductDetailsInfo = ({
   averageRating,
 }) => {
   const [active, setActive] = useState(1);
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/nqkha
   return (
     <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
@@ -425,36 +300,6 @@ const ProductDetailsInfo = ({
       </div>
       {active === 1 ? (
         <>
-<<<<<<< HEAD
-          {/* //   <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
-            
-        //   </p> */}
-          <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad earum
-            enim adipisci explicabo dicta quae labore tenetur esse amet cumque
-            reiciendis, architecto odit voluptatum odio dolor inventore aut
-            ipsam reprehenderit! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Rem officiis aliquid necessitatibus,
-            exercitationem aliquam voluptas, libero facilis accusantium officia
-            tempore ipsam, harum itaque rerum ipsa nostrum iusto totam commodi
-            placeat!
-          </p>
-          <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad earum
-            enim adipisci explicabo dicta quae labore tenetur esse amet cumque
-            reiciendis, architecto odit voluptatum odio dolor inventore aut
-            ipsam reprehenderit! Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Rem officiis aliquid necessitatibus,
-            exercitationem aliquam voluptas, libero facilis accusantium officia
-            tempore ipsam, harum itaque rerum ipsa nostrum iusto totam commodi
-            placeat!
-          </p>
-        </>
-      ) : null}
-      {active === 2 ? (
-        <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
-          {/* {data &&
-=======
           <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
             {data.description}
           </p>
@@ -464,7 +309,6 @@ const ProductDetailsInfo = ({
       {active === 2 ? (
         <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
           {data &&
->>>>>>> origin/nqkha
             data.reviews.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
@@ -487,26 +331,15 @@ const ProductDetailsInfo = ({
               <h5>No Reviews have for this product!</h5>
             )}
           </div>
-<<<<<<< HEAD
-        </div> */}
-          <p>No Reviews yet!</p>
-=======
->>>>>>> origin/nqkha
         </div>
       ) : null}
 
       {active === 3 && (
         <div className="w-full block 800px:flex p-5">
           <div className="w-full 800px:w-[50%]">
-<<<<<<< HEAD
-            {/* <Link to={`/shop/preview/${data.shop._id}`}> */}
-            <div className="flex items-center">
-              {/* <img
-=======
             <Link to={`/shop/preview/${data.shop._id}`}>
               <div className="flex items-center">
                 <img
->>>>>>> origin/nqkha
                   src={`${backend_url}${data?.shop?.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
@@ -516,32 +349,9 @@ const ProductDetailsInfo = ({
                   <h5 className="pb-2 text-[15px]">
                     ({averageRating}/5) Ratings
                   </h5>
-<<<<<<< HEAD
-                </div> */}
-              <img
-                src={data.shop.shop_avatar.url}
-                className="w-[50px] h-[50px] rounded-full"
-                alt=""
-              />
-              <div className="pl-3">
-                <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
-                <h5 className="pb-3 text-[15px]">
-                  ({data.shop.ratings}) Ratings
-                </h5>
-              </div>
-            </div>
-            <p className="pt-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-              saepe dolorem modi, alias quod vel recusandae sunt optio illo
-              quisquam ut temporibus accusamus facere? Nihil dicta aliquam qui
-              ad pariatur?
-            </p>
-            {/* </Link>
-=======
                 </div>
               </div>
             </Link>
->>>>>>> origin/nqkha
             <p className="pt-2">{data.shop.description}</p>
           </div>
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
@@ -568,12 +378,8 @@ const ProductDetailsInfo = ({
                 >
                   <h4 className="text-white">Visit Shop</h4>
                 </div>
-<<<<<<< HEAD
-              </Link> */}
-=======
               </Link>
             </div>
->>>>>>> origin/nqkha
           </div>
         </div>
       )}

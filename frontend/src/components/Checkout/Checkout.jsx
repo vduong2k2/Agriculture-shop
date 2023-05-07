@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-
-const Checkout = () => {
-  return <div>Checkout</div>;
-=======
 import React, { useState } from "react";
 import styles from "../../styles/styles";
 import { Country, State } from "country-state-city";
@@ -356,7 +350,6 @@ const CartData = ({
       </form>
     </div>
   );
->>>>>>> origin/nqkha
 };
 
 export default Checkout;

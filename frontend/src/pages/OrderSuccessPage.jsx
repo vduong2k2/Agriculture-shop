@@ -1,11 +1,7 @@
 import React from "react";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
-<<<<<<< HEAD
-import Lottie from "lottie-react";
-=======
 import Lottie from "react-lottie";
->>>>>>> origin/nqkha
 import animationData from "../Assests/animations/107043-success.json";
 
 const OrderSuccessPage = () => {

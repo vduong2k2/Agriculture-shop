@@ -10,17 +10,10 @@ import {
   BestSellingPage,
   EventsPage,
   FAQPage,
-<<<<<<< HEAD
-  ProductDetailsPage,
-  CheckoutPage,
-  PaymentPage,
-  OrderSuccessPage,
-=======
   CheckoutPage,
   PaymentPage,
   OrderSuccessPage,
   ProductDetailsPage,
->>>>>>> origin/nqkha
   ProfilePage,
   ShopCreatePage,
   SellerActivationPage,
@@ -51,7 +44,7 @@ import {
   AdminDashboardOrders,
   AdminDashboardProducts,
   AdminDashboardEvents,
-  AdminDashboardWithdraw
+  AdminDashboardWithdraw,
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -60,10 +53,6 @@ import { loadSeller, loadUser } from "./redux/actions/user";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
 import { ShopHomePage } from "./ShopRoutes.js";
-<<<<<<< HEAD
-import ProtectedRoute from "../src/ProtectedRoute";
-///
-=======
 import SellerProtectedRoute from "./routes/SellerProtectedRoute";
 import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
@@ -72,7 +61,6 @@ import { server } from "./server";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
->>>>>>> origin/nqkha
 const App = () => {
   const [stripeApikey, setStripeApiKey] = useState("");
 
@@ -94,45 +82,10 @@ const App = () => {
         <Elements stripe={loadStripe(stripeApikey)}>
           <Routes>
             <Route
-<<<<<<< HEAD
-              path="/activation/:activation_token"
-              element={<ActivationPage />}
-            />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/product/:name" element={<ProductDetailsPage />} />
-            <Route path="/best-selling" element={<BestSellingPage />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route
-              path="/checkout"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/payment" element={<PaymentPage />} />
-            <Route path="/order/success/:id" element={<OrderSuccessPage />} />
-            <Route path="/shop-create" element={<ShopCreatePage />} />
-            <Route path="/shop-login" element={<ShopLoginPage />} />
-            <Route path="/shop/:id" element={<ShopHomePage />} />
-            <Route
-              path="/seller/activation/:activation_token"
-              element={<SellerActivationPage />}
-=======
               path="/payment"
               element={
                 <ProtectedRoute>
                   <PaymentPage />
-                </ProtectedRoute>
-              }
->>>>>>> origin/nqkha
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute isAuthenticated={isAuthenticated}>
-                  <ProfilePage />
                 </ProtectedRoute>
               }
             />
@@ -339,7 +292,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-products"
           element={
             <ProtectedAdminRoute>
@@ -347,7 +300,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-events"
           element={
             <ProtectedAdminRoute>
@@ -355,7 +308,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-withdraw-request"
           element={
             <ProtectedAdminRoute>

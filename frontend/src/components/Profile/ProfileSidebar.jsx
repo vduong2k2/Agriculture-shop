@@ -1,21 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import {
-  AiOutlineCreditCard,
-  AiOutlineLogin,
-  AiOutlineMessage,
-} from "react-icons/ai";
-import axios from "axios";
-import { HiOutlineReceiptRefund, HiOutlineShoppingBag } from "react-icons/hi";
-import { TbAddressBook } from "react-icons/tb";
-import { RxPerson } from "react-icons/rx";
-import { useNavigate } from "react-router-dom";
-import { MdOutlineTrackChanges } from "react-icons/md";
-import { server } from "../../server";
-import { toast } from "react-toastify";
-const ProfileSidebar = ({ setActive, active }) => {
-  const navigate = useNavigate();
-=======
 import { AiOutlineLogin, AiOutlineMessage } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { HiOutlineReceiptRefund, HiOutlineShoppingBag } from "react-icons/hi";
@@ -35,7 +18,6 @@ import { useSelector } from "react-redux";
 const ProfileSidebar = ({ setActive, active }) => {
   const navigate = useNavigate();
  const {user} = useSelector((state) => state.user);
->>>>>>> origin/nqkha
   const logoutHandler = () => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
@@ -89,10 +71,6 @@ const ProfileSidebar = ({ setActive, active }) => {
           Refunds
         </span>
       </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/nqkha
       <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(4) || navigate("/inbox")}
@@ -106,10 +84,6 @@ const ProfileSidebar = ({ setActive, active }) => {
           Inbox
         </span>
       </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/nqkha
       <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(5)}
@@ -128,26 +102,16 @@ const ProfileSidebar = ({ setActive, active }) => {
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(6)}
       >
-<<<<<<< HEAD
-        <AiOutlineCreditCard size={20} color={active === 6 ? "red" : ""} />
-=======
         <RiLockPasswordLine size={20} color={active === 6 ? "red" : ""} />
->>>>>>> origin/nqkha
         <span
           className={`pl-3 ${
             active === 6 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-<<<<<<< HEAD
-          Payment Methods
-        </span>
-      </div>
-=======
           Change Password
         </span>
       </div>
 
->>>>>>> origin/nqkha
       <div
         className="flex items-center cursor-pointer w-full mb-8"
         onClick={() => setActive(7)}
@@ -161,11 +125,6 @@ const ProfileSidebar = ({ setActive, active }) => {
           Address
         </span>
       </div>
-<<<<<<< HEAD
-      <div
-        className="single_item flex items-center cursor-pointer w-full mb-8"
-        onClick={() => setActive(8) || logoutHandler()}
-=======
 
       {user && user?.role === "Admin" && (
         <Link to="/admin/dashboard">
@@ -190,7 +149,6 @@ const ProfileSidebar = ({ setActive, active }) => {
       <div
         className="single_item flex items-center cursor-pointer w-full mb-8"
         onClick={logoutHandler}
->>>>>>> origin/nqkha
       >
         <AiOutlineLogin size={20} color={active === 8 ? "red" : ""} />
         <span
