@@ -2,7 +2,11 @@ import React from 'react'
 import CheckoutSteps from '../components/Checkout/CheckoutSteps'
 import Footer from '../components/Layout/Footer'
 import Header from '../components/Layout/Header'
+<<<<<<< HEAD
 import Payment from "../components/Payment/Payment.jsx";
+=======
+import Payment from "../components/Payment/Payment";
+>>>>>>> origin/nqkha
 
 const PaymentPage = () => {
   return (

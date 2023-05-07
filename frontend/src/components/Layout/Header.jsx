@@ -9,8 +9,10 @@ import {
 } from "react-icons/ai";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
+<<<<<<< HEAD
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import { backend_url } from "../../server";
@@ -23,21 +25,43 @@ const Header = ({ activeHeading }) => {
   // const { wishlist } = useSelector((state) => state.wishlist);
   // const { cart } = useSelector((state) => state.cart);
   // const { allProducts } = useSelector((state) => state.products);
+=======
+import { useSelector } from "react-redux";
+import { backend_url } from "../../server";
+import Cart from "../cart/Cart";
+import Wishlist from "../Wishlist/Wishlist";
+import { RxCross1 } from "react-icons/rx";
+
+const Header = ({ activeHeading }) => {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isSeller } = useSelector((state) => state.seller);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { cart } = useSelector((state) => state.cart);
+  const { allProducts } = useSelector((state) => state.products);
+>>>>>>> origin/nqkha
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
-
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+
+<<<<<<< HEAD
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishlist, setOpenWishlist] = useState(false);
+  const [open, setOpen] = useState(false);
+=======
+>>>>>>> origin/nqkha
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    const filteredProducts = productData.filter((product) =>
-      product.name.toLowerCase().includes(term.toLowerCase())
-    );
+    const filteredProducts =
+      allProducts &&
+      allProducts.filter((product) =>
+        product.name.toLowerCase().includes(term.toLowerCase())
+      );
     setSearchData(filteredProducts);
   };
 
@@ -78,13 +102,11 @@ const Header = ({ activeHeading }) => {
               <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
                 {searchData &&
                   searchData.map((i, index) => {
-                    const d = i.name;
-                    const Product_name = d.replace(/\s+/g, "-");
                     return (
-                      <Link key={index} to={`/product/${Product_name}`}>
+                      <Link to={`/product/${i._id}`}>
                         <div className="w-full flex items-start-py-3">
                           <img
-                            src={i.image_Url[0].url}
+                            src={`${backend_url}${i.images[0]}`}
                             alt=""
                             className="w-[40px] h-[40px] mr-[10px]"
                           />
@@ -96,10 +118,11 @@ const Header = ({ activeHeading }) => {
               </div>
             ) : null}
           </div>
+
           <div className={`${styles.button}`}>
-            <Link to="/shop-create">
+            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-[#fff] flex items-center">
-                Become Seller
+                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
                 <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>
@@ -109,11 +132,16 @@ const Header = ({ activeHeading }) => {
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+<<<<<<< HEAD
         } transition hidden 800px:flex items-center justify-between w-full bg-[#16a11d] h-[70px]`}
+=======
+        } transition hidden 800px:flex items-center justify-between w-full bg-[#0ecc0e] h-[70px]`}
+>>>>>>> origin/nqkha
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
         >
+<<<<<<< HEAD
           <div>
             <div
               className={
@@ -125,6 +153,12 @@ const Header = ({ activeHeading }) => {
                 className="absolute top-3 left-2"
                 //onClick={() => setOpen(true)}
               />
+=======
+          {/* categories */}
+          <div onClick={() => setDropDown(!dropDown)}>
+            <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
+              <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
+>>>>>>> origin/nqkha
               <button
                 className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
               >
@@ -143,12 +177,20 @@ const Header = ({ activeHeading }) => {
               ) : null}
             </div>
           </div>
+<<<<<<< HEAD
 
           {/* navitems */}
           <div className={`${styles.noramlFlex}`}>
             <Navbar active={activeHeading} />
           </div>
 
+=======
+          {/* navitems */}
+          <div className={`${styles.noramlFlex}`}>
+            <Navbar active={activeHeading} />
+          </div>
+
+>>>>>>> origin/nqkha
           <div className="flex">
             <div className={`${styles.noramlFlex}`}>
               <div
@@ -157,10 +199,18 @@ const Header = ({ activeHeading }) => {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+<<<<<<< HEAD
                   0
                 </span>
               </div>
             </div>
+=======
+                  {wishlist && wishlist.length}
+                </span>
+              </div>
+            </div>
+
+>>>>>>> origin/nqkha
             <div className={`${styles.noramlFlex}`}>
               <div
                 className="relative cursor-pointer mr-[15px]"
@@ -171,16 +221,28 @@ const Header = ({ activeHeading }) => {
                   color="rgb(255 255 255 / 83%)"
                 />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+<<<<<<< HEAD
                   0
                 </span>
               </div>
             </div>
+=======
+                  {cart && cart.length}
+                </span>
+              </div>
+            </div>
+
+>>>>>>> origin/nqkha
             <div className={`${styles.noramlFlex}`}>
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
+<<<<<<< HEAD
                       src={`${backend_url}${user.avatar}`}
+=======
+                      src={`${backend_url}${user?.avatar}`}
+>>>>>>> origin/nqkha
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -190,6 +252,160 @@ const Header = ({ activeHeading }) => {
                     <CgProfile size={30} color="rgb(255 255 255 / 83%)" />
                   </Link>
                 )}
+<<<<<<< HEAD
+=======
+              </div>
+            </div>
+
+            {/* cart popup */}
+            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+
+            {/* wishlist popup */}
+            {openWishlist ? (
+              <Wishlist setOpenWishlist={setOpenWishlist} />
+            ) : null}
+          </div>
+        </div>
+      </div>
+
+      {/* mobile header */}
+      <div
+        className={`${
+          active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
+        }
+      w-full h-[60px] bg-[#fff] z-50 top-0 left-0 shadow-sm 800px:hidden`}
+      >
+        <div className="w-full flex items-center justify-between">
+          <div>
+            <BiMenuAltLeft
+              size={40}
+              className="ml-4"
+              onClick={() => setOpen(true)}
+            />
+          </div>
+          <div>
+            <Link to="/">
+              <img
+                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
+                alt=""
+                className="mt-3 cursor-pointer"
+              />
+            </Link>
+          </div>
+          <div>
+            <div
+              className="relative mr-[20px]"
+              onClick={() => setOpenCart(true)}
+            >
+              <AiOutlineShoppingCart size={30} />
+              <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
+                {cart && cart.length}
+              </span>
+            </div>
+          </div>
+          {/* cart popup */}
+          {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+
+          {/* wishlist popup */}
+          {openWishlist ? <Wishlist setOpenWishlist={setOpenWishlist} /> : null}
+        </div>
+
+        {/* header sidebar */}
+        {open && (
+          <div
+            className={`fixed w-full bg-[#0000005f] z-20 h-full top-0 left-0`}
+          >
+            <div className="fixed w-[70%] bg-[#fff] h-screen top-0 left-0 z-10 overflow-y-scroll">
+              <div className="w-full justify-between flex pr-3">
+                <div>
+                  <div
+                    className="relative mr-[15px]"
+                    onClick={() => setOpenWishlist(true) || setOpen(false)}
+                  >
+                    <AiOutlineHeart size={30} className="mt-5 ml-3" />
+                    <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
+                      {wishlist && wishlist.length}
+                    </span>
+                  </div>
+                </div>
+                <RxCross1
+                  size={30}
+                  className="ml-4 mt-5"
+                  onClick={() => setOpen(false)}
+                />
+              </div>
+
+              <div className="my-8 w-[92%] m-auto h-[40px relative]">
+                <input
+                  type="search"
+                  placeholder="Search Product..."
+                  className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+                {searchData && (
+                  <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
+                    {searchData.map((i) => {
+                      const d = i.name;
+
+                      const Product_name = d.replace(/\s+/g, "-");
+                      return (
+                        <Link to={`/product/${Product_name}`}>
+                          <div className="flex items-center">
+                            <img
+                              src={i.image_Url[0].url}
+                              alt=""
+                              className="w-[50px] mr-2"
+                            />
+                            <h5>{i.name}</h5>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              <Navbar active={activeHeading} />
+              <div className={`${styles.button} ml-4 !rounded-[4px]`}>
+                <Link to="/shop-create">
+                  <h1 className="text-[#fff] flex items-center">
+                    Become Seller <IoIosArrowForward className="ml-1" />
+                  </h1>
+                </Link>
+              </div>
+              <br />
+              <br />
+              <br />
+
+              <div className="flex w-full justify-center">
+                {isAuthenticated ? (
+                  <div>
+                    <Link to="/profile">
+                      <img
+                        src={`${backend_url}${user.avatar}`}
+                        alt=""
+                        className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
+                      />
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="text-[18px] pr-[10px] text-[#000000b7]"
+                    >
+                      Login /
+                    </Link>
+                    <Link
+                      to="/sign-up"
+                      className="text-[18px] text-[#000000b7]"
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
+>>>>>>> origin/nqkha
               </div>
             </div>
             {/* cart popup */}
@@ -237,6 +453,7 @@ const Header = ({ activeHeading }) => {
               </span>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
         {/* header sidebar */}
         {open && (
@@ -336,6 +553,9 @@ const Header = ({ activeHeading }) => {
           </div>
         )}
         ;
+=======
+        )}
+>>>>>>> origin/nqkha
       </div>
     </>
   );

@@ -1,17 +1,55 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../styles/styles";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> origin/nqkha
 import {
   AiFillHeart,
   AiOutlineHeart,
   AiOutlineMessage,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
+<<<<<<< HEAD
 const ProductDetails = ({ data }) => {
+=======
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { getAllProductsShop } from "../../redux/actions/product";
+import { backend_url, server } from "../../server";
+import styles from "../../styles/styles";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/actions/wishlist";
+import { addTocart } from "../../redux/actions/cart";
+import { toast } from "react-toastify";
+import Ratings from "./Ratings";
+import axios from "axios";
+
+const ProductDetails = ({ data }) => {
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { cart } = useSelector((state) => state.cart);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { products } = useSelector((state) => state.products);
+>>>>>>> origin/nqkha
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllProductsShop(data && data?.shop._id));
+    if (wishlist && wishlist.find((i) => i._id === data?._id)) {
+      setClick(true);
+    } else {
+      setClick(false);
+    }
+  }, [data, wishlist]);
+>>>>>>> origin/nqkha
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -23,6 +61,7 @@ const ProductDetails = ({ data }) => {
     }
   };
 
+<<<<<<< HEAD
   const handleMessageSubmit = async () => {
     // if (isAuthenticated) {
     //   const groupTitle = data._id + user._id;
@@ -45,6 +84,72 @@ const ProductDetails = ({ data }) => {
     // }
     navigate("/inbox?conversation=507ebjver884ehfdjeriv84");
   };
+=======
+  const removeFromWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(removeFromWishlist(data));
+  };
+
+  const addToWishlistHandler = (data) => {
+    setClick(!click);
+    dispatch(addToWishlist(data));
+  };
+
+  const addToCartHandler = (id) => {
+    const isItemExists = cart && cart.find((i) => i._id === id);
+    if (isItemExists) {
+      toast.error("Item already in cart!");
+    } else {
+      if (data.stock < 1) {
+        toast.error("Product stock limited!");
+      } else {
+        const cartData = { ...data, qty: count };
+        dispatch(addTocart(cartData));
+        toast.success("Item added to cart successfully!");
+      }
+    }
+  };
+
+  const totalReviewsLength =
+    products &&
+    products.reduce((acc, product) => acc + product.reviews.length, 0);
+
+  const totalRatings =
+    products &&
+    products.reduce(
+      (acc, product) =>
+        acc + product.reviews.reduce((sum, review) => sum + review.rating, 0),
+      0
+    );
+
+  const avg =  totalRatings / totalReviewsLength || 0;
+
+  const averageRating = avg.toFixed(2);
+
+
+  const handleMessageSubmit = async () => {
+    if (isAuthenticated) {
+      const groupTitle = data._id + user._id;
+      const userId = user._id;
+      const sellerId = data.shop._id;
+      await axios
+        .post(`${server}/conversation/create-new-conversation`, {
+          groupTitle,
+          userId,
+          sellerId,
+        })
+        .then((res) => {
+          navigate(`/inbox?${res.data.conversation._id}`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error("Please login to create a conversation");
+    }
+  };
+
+>>>>>>> origin/nqkha
   return (
     <div className="bg-white">
       {data ? (
@@ -52,6 +157,7 @@ const ProductDetails = ({ data }) => {
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
+<<<<<<< HEAD
                 <img src={data.image_Url[select].url} alt="" />
                 <div className="w-full flex">
                   <div
@@ -81,16 +187,57 @@ const ProductDetails = ({ data }) => {
                 </div>
               </div>
               <div className="w-full 800px:w-[50%]">
+=======
+                <img
+                  src={`${backend_url}${data && data.images[select]}`}
+                  alt=""
+                  className="w-[80%]"
+                />
+                <div className="w-full flex">
+                  {data &&
+                    data.images.map((i, index) => (
+                      <div
+                        className={`${
+                          select === 0 ? "border" : "null"
+                        } cursor-pointer`}
+                      >
+                        <img
+                          src={`${backend_url}${i}`}
+                          alt=""
+                          className="h-[200px] overflow-hidden mr-3 mt-3"
+                          onClick={() => setSelect(index)}
+                        />
+                      </div>
+                    ))}
+                  <div
+                    className={`${
+                      select === 1 ? "border" : "null"
+                    } cursor-pointer`}
+                  ></div>
+                </div>
+              </div>
+              <div className="w-full 800px:w-[50%] pt-5">
+>>>>>>> origin/nqkha
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
                 <p>{data.description}</p>
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
+<<<<<<< HEAD
                     {data.discount_price}$
                   </h4>
                   <h3 className={`${styles.price}`}>
                     {data.price ? data.price + "$" : null}
                   </h3>
                 </div>
+=======
+                    {data.discountPrice}$
+                  </h4>
+                  <h3 className={`${styles.price}`}>
+                    {data.originalPrice ? data.originalPrice + "$" : null}
+                  </h3>
+                </div>
+
+>>>>>>> origin/nqkha
                 <div className="flex items-center mt-12 justify-between pr-3">
                   <div>
                     <button
@@ -114,8 +261,12 @@ const ProductDetails = ({ data }) => {
                       <AiFillHeart
                         size={30}
                         className="cursor-pointer"
+<<<<<<< HEAD
                         //   onClick={() => removeFromWishlistHandler(data)}
                         onClick={() => setClick(!click)}
+=======
+                        onClick={() => removeFromWishlistHandler(data)}
+>>>>>>> origin/nqkha
                         color={click ? "red" : "#333"}
                         title="Remove from wishlist"
                       />
@@ -123,8 +274,13 @@ const ProductDetails = ({ data }) => {
                       <AiOutlineHeart
                         size={30}
                         className="cursor-pointer"
+<<<<<<< HEAD
                         // onClick={() => addToWishlistHandler(data)}
                         onClick={() => setClick(!click)}
+=======
+                        onClick={() => addToWishlistHandler(data)}
+                        color={click ? "red" : "#333"}
+>>>>>>> origin/nqkha
                         title="Add to wishlist"
                       />
                     )}
@@ -132,13 +288,18 @@ const ProductDetails = ({ data }) => {
                 </div>
                 <div
                   className={`${styles.button} !mt-6 !rounded !h-11 flex items-center`}
+<<<<<<< HEAD
                   //   onClick={() => addToCartHandler(data._id)}
+=======
+                  onClick={() => addToCartHandler(data._id)}
+>>>>>>> origin/nqkha
                 >
                   <span className="text-white flex items-center">
                     Add to cart <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
+<<<<<<< HEAD
                   <img
                     src={data.shop.shop_avatar.url}
                     alt=""
@@ -154,6 +315,27 @@ const ProductDetails = ({ data }) => {
                   </div>
                   <div
                     className={`${styles.button} bg-[#6443d1 mt-1 !rounded !h-11] `}
+=======
+                  <Link to={`/shop/preview/${data?.shop._id}`}>
+                    <img
+                      src={`${backend_url}${data?.shop?.avatar}`}
+                      alt=""
+                      className="w-[50px] h-[50px] rounded-full mr-2"
+                    />
+                  </Link>
+                  <div className="pr-8">
+                    <Link to={`/shop/preview/${data?.shop._id}`}>
+                      <h3 className={`${styles.shop_name} pb-1 pt-1`}>
+                        {data.shop.name}
+                      </h3>
+                    </Link>
+                    <h5 className="pb-3 text-[15px]">
+                      ({averageRating}/5) Ratings
+                    </h5>
+                  </div>
+                  <div
+                    className={`${styles.button} bg-[#6443d1] mt-4 !rounded !h-11`}
+>>>>>>> origin/nqkha
                     onClick={handleMessageSubmit}
                   >
                     <span className="text-white flex items-center">
@@ -166,9 +348,15 @@ const ProductDetails = ({ data }) => {
           </div>
           <ProductDetailsInfo
             data={data}
+<<<<<<< HEAD
             // products={products}
             // totalReviewsLength={totalReviewsLength}
             // averageRating={averageRating}
+=======
+            products={products}
+            totalReviewsLength={totalReviewsLength}
+            averageRating={averageRating}
+>>>>>>> origin/nqkha
           />
           <br />
           <br />
@@ -177,6 +365,10 @@ const ProductDetails = ({ data }) => {
     </div>
   );
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/nqkha
 const ProductDetailsInfo = ({
   data,
   products,
@@ -184,6 +376,10 @@ const ProductDetailsInfo = ({
   averageRating,
 }) => {
   const [active, setActive] = useState(1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/nqkha
   return (
     <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">
@@ -229,6 +425,7 @@ const ProductDetailsInfo = ({
       </div>
       {active === 1 ? (
         <>
+<<<<<<< HEAD
           {/* //   <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
             
         //   </p> */}
@@ -257,6 +454,17 @@ const ProductDetailsInfo = ({
       {active === 2 ? (
         <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
           {/* {data &&
+=======
+          <p className="py-2 text-[18px] leading-8 pb-10 whitespace-pre-line">
+            {data.description}
+          </p>
+        </>
+      ) : null}
+
+      {active === 2 ? (
+        <div className="w-full min-h-[40vh] flex flex-col items-center py-3 overflow-y-scroll">
+          {data &&
+>>>>>>> origin/nqkha
             data.reviews.map((item, index) => (
               <div className="w-full flex my-2">
                 <img
@@ -279,17 +487,26 @@ const ProductDetailsInfo = ({
               <h5>No Reviews have for this product!</h5>
             )}
           </div>
+<<<<<<< HEAD
         </div> */}
           <p>No Reviews yet!</p>
+=======
+>>>>>>> origin/nqkha
         </div>
       ) : null}
 
       {active === 3 && (
         <div className="w-full block 800px:flex p-5">
           <div className="w-full 800px:w-[50%]">
+<<<<<<< HEAD
             {/* <Link to={`/shop/preview/${data.shop._id}`}> */}
             <div className="flex items-center">
               {/* <img
+=======
+            <Link to={`/shop/preview/${data.shop._id}`}>
+              <div className="flex items-center">
+                <img
+>>>>>>> origin/nqkha
                   src={`${backend_url}${data?.shop?.avatar}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
@@ -299,6 +516,7 @@ const ProductDetailsInfo = ({
                   <h5 className="pb-2 text-[15px]">
                     ({averageRating}/5) Ratings
                   </h5>
+<<<<<<< HEAD
                 </div> */}
               <img
                 src={data.shop.shop_avatar.url}
@@ -319,6 +537,11 @@ const ProductDetailsInfo = ({
               ad pariatur?
             </p>
             {/* </Link>
+=======
+                </div>
+              </div>
+            </Link>
+>>>>>>> origin/nqkha
             <p className="pt-2">{data.shop.description}</p>
           </div>
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
@@ -345,7 +568,12 @@ const ProductDetailsInfo = ({
                 >
                   <h4 className="text-white">Visit Shop</h4>
                 </div>
+<<<<<<< HEAD
               </Link> */}
+=======
+              </Link>
+            </div>
+>>>>>>> origin/nqkha
           </div>
         </div>
       )}

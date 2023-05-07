@@ -1,3 +1,6 @@
-import ShopHomePage from "./pages/Shop/ShopHomePage.jsx";
+import ShopHomePage from "./pages/Shop/ShopHomePage";
 
-export { ShopHomePage };
+
+export {
+    ShopHomePage,
+};

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -26,12 +27,17 @@ const Login = () => {
       .then((res) => {
         toast.success("Login Success!");
         navigate("/");
+<<<<<<< HEAD
         window.location.reload(true);
+=======
+        window.location.reload(true); 
+>>>>>>> origin/nqkha
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
   };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -61,10 +67,9 @@ const Login = () => {
                 />
               </div>
             </div>
-
             <div>
               <label
-                htmlFor="email"
+                htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
                 Password
@@ -111,10 +116,10 @@ const Login = () => {
               </div>
               <div className="text-sm">
                 <a
-                  href=".forget-password"
+                  href=".forgot-password"
                   className="font-medium text-blue-600 hover:text-blue-500"
                 >
-                  Forget your password
+                  Forgot your password?
                 </a>
               </div>
             </div>
@@ -129,7 +134,7 @@ const Login = () => {
             <div className={`${styles.noramlFlex} w-full`}>
               <h4>Not have any account?</h4>
               <Link to="/sign-up" className="text-blue-600 pl-2">
-                Sign up
+                Sign Up
               </Link>
             </div>
           </form>
