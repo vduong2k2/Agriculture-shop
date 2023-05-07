@@ -35,4 +35,5 @@ const DropDown = ({ categoriesData, setDropDown }) => {
     </div>
   );
 };
+
 export default DropDown;
