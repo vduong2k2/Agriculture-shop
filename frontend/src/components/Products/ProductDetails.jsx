@@ -247,7 +247,6 @@ const ProductDetails = ({ data }) => {
     </div>
   );
 };
-
 const ProductDetailsInfo = ({
   data,
   products,
@@ -255,7 +254,6 @@ const ProductDetailsInfo = ({
   averageRating,
 }) => {
   const [active, setActive] = useState(1);
-
   return (
     <div className="bg-[#f5f6fb] px-3 800px:px-10 py-2 rounded">
       <div className="w-full flex justify-between border-b pt-10 pb-2">

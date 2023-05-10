@@ -65,8 +65,8 @@ const ProfileContent = ({ active }) => {
         withCredentials: true,
       })
       .then((response) => {
-         dispatch(loadUser());
-         toast.success("avatar updated successfully!");
+        dispatch(loadUser());
+        toast.success("avatar updated successfully!");
       })
       .catch((error) => {
         toast.error(error);
@@ -124,7 +124,6 @@ const ProfileContent = ({ active }) => {
                   />
                 </div>
               </div>
-
               <div className="w-full 800px:flex block pb-3">
                 <div className=" w-[100%] 800px:w-[50%]">
                   <label className="block pb-2">Phone Number</label>
@@ -165,14 +164,12 @@ const ProfileContent = ({ active }) => {
           <AllOrders />
         </div>
       )}
-
       {/* Refund */}
       {active === 3 && (
         <div>
           <AllRefundOrders />
         </div>
       )}
-
       {/* Track order */}
       {active === 5 && (
         <div>
@@ -256,7 +253,6 @@ const AllOrders = () => {
       },
     },
   ];
-
   const row = [];
 
   orders &&
@@ -264,7 +260,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total: item.totalPrice + " VND",
         status: item.status,
       });
     });
@@ -291,7 +287,8 @@ const AllRefundOrders = () => {
     dispatch(getAllOrdersOfUser(user._id));
   }, []);
 
-  const eligibleOrders = orders && orders.filter((item) => item.status === "Processing refund");
+  const eligibleOrders =
+    orders && orders.filter((item) => item.status === "Processing refund");
 
   const columns = [
     { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
@@ -347,11 +344,11 @@ const AllRefundOrders = () => {
   const row = [];
 
   eligibleOrders &&
-   eligibleOrders.forEach((item) => {
+    eligibleOrders.forEach((item) => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total: item.totalPrice + " VND",
         status: item.status,
       });
     });
@@ -428,7 +425,6 @@ const TrackOrder = () => {
       },
     },
   ];
-
   const row = [];
 
   orders &&
@@ -436,7 +432,7 @@ const TrackOrder = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total: item.totalPrice + " VND",
         status: item.status,
       });
     });
