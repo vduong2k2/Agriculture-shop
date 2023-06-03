@@ -18,17 +18,19 @@ const Hero = () => {
           Best Collection for <br /> home Decoration
         </h1>
         <p className="pt-5 text-[16px] font-[Poppins] font-[400] text-[#000000ba]">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae,
-          assumenda? Quisquam itaque <br /> exercitationem labore vel, dolore
-          quidem asperiores, laudantium temporibus soluta optio consequatur{" "}
-          <br /> aliquam deserunt officia. Dolorum saepe nulla provident.
+          Tại trang web của chúng tôi, bạn sẽ tìm thấy một loạt các nông sản đa
+          dạng và phong phú từ các vùng trồng trọt uy tín trên khắp đất nước.
+          <br/>
+          Chúng tôi đặc biệt chú trọng đến việc lựa chọn những sản phẩm tươi
+          ngon, không chất bảo quản và được sản xuất theo các tiêu chuẩn an toàn
+          vệ sinh cao nhất.
         </p>
         <Link to="/products" className="inline-block">
-            <div className={`${styles.button} mt-5`}>
-                 <span className="text-[#fff] font-[Poppins] text-[18px]">
-                    Shop Now
-                 </span>
-            </div>
+          <div className={`${styles.button} mt-5`}>
+            <span className="text-[#fff] font-[Poppins] text-[18px]">
+              Shop Now
+            </span>
+          </div>
         </Link>
       </div>
     </div>

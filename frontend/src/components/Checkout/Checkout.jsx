@@ -334,7 +334,7 @@ const CartData = ({
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
         <h5 className="text-[18px] font-[600]">
           -{" "}
-          {discountPercentenge ? " VND" + discountPercentenge.toString() : null}
+          {discountPercentenge ? discountPercentenge.toString() + " VND" : null}
         </h5>
       </div>
       <h5 className="text-[18px] font-[600] text-end pt-3">{totalPrice} VND</h5>
