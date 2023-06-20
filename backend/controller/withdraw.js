@@ -8,6 +8,7 @@ const sendMail = require("../utils/sendMail");
 const router = express.Router();
 
 // create withdraw request --- only for seller
+// Xử lý yêu cầu POST để tạo yêu cầu rút tiền. Nó sử dụng middleware isSeller để xác thực người bán. Sau đó, nó gửi email thông báo cho người bán rằng yêu cầu rút tiền của họ đang được xử lý. Sau đó, nó tạo một yêu cầu rút tiền mới trong cơ sở dữ liệu và cập nhật số dư có sẵn trong cửa hàng của người bán. Cuối cùng, nó trả về kết quả thành công và thông tin về yêu cầu rút tiền.
 router.post(
   "/create-withdraw-request",
   isSeller,
@@ -52,7 +53,7 @@ router.post(
 );
 
 // get all withdraws --- admnin
-
+// Xử lý yêu cầu GET để lấy danh sách tất cả các yêu cầu rút tiền. Nó sử dụng middleware isAuthenticated và isAdmin để xác thực và kiểm tra vai trò của người dùng. Nếu người dùng không phải là quản trị viên, nó trả về lỗi. Nếu người dùng là quản trị viên, nó lấy danh sách các yêu cầu rút tiền từ cơ sở dữ liệu và trả về kết quả thành công cùng với danh sách yêu cầu rút tiền.
 router.get(
   "/get-all-withdraw-request",
   isAuthenticated,
@@ -72,6 +73,7 @@ router.get(
 );
 
 // update withdraw request ---- admin
+// Xử lý yêu cầu PUT để cập nhật yêu cầu rút tiền. Nó sử dụng middleware isAuthenticated và isAdmin để xác thực và kiểm tra vai trò của người dùng. Nếu người dùng không phải là quản trị viên, nó trả về lỗi. Nếu người dùng là quản trị viên, nó cập nhật trạng thái của yêu cầu rút tiền và thời gian cập nhật trong cơ sở dữ liệu. Sau đó, nó cập nhật thông tin giao dịch của người bán và gửi email thông báo cho người bán rằng yêu cầu rút tiền của họ đang được xử lý. Cuối cùng, nó trả về kết quả thành công và thông tin về yêu cầu rút tiền đã được cập nhật.
 router.put(
   "/update-withdraw-request/:id",
   isAuthenticated,

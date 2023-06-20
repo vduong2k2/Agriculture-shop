@@ -66,6 +66,7 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
 });
 
 // create activation token
+// Tạo mã thông báo kích hoạt cho cửa hàng. Nó sử dụng thư viện jsonwebtoken để tạo mã thông báo dựa trên thông tin của cửa hàng và một khóa bí mật được cung cấp trong biến môi trường ACTIVATION_SECRET.
 const createActivationToken = (seller) => {
   return jwt.sign(seller, process.env.ACTIVATION_SECRET, {
     expiresIn: "5m",
@@ -73,6 +74,7 @@ const createActivationToken = (seller) => {
 };
 
 // activate user
+// Xử lý yêu cầu POST để kích hoạt cửa hàng. Nó nhận mã thông báo kích hoạt từ yêu cầu và xác thực mã thông báo đó. Nếu mã thông báo không hợp lệ, nó trả về một lỗi. Nếu hợp lệ, nó tạo một tài khoản cửa hàng mới trong cơ sở dữ liệu và gửi mã thông báo truy cập cho cửa hàng đó.
 router.post(
   "/activation",
   catchAsyncErrors(async (req, res, next) => {
@@ -114,6 +116,7 @@ router.post(
 );
 
 // login shop
+// Xử lý yêu cầu POST để đăng nhập vào cửa hàng. Nó kiểm tra xem người dùng đã cung cấp đầy đủ thông tin đăng nhập chưa. Sau đó, nó tìm kiếm cửa hàng trong cơ sở dữ liệu dựa trên địa chỉ email và xác nhận mật khẩu. Nếu tìm thấy, nó gửi mã thông báo truy cập cho cửa hàng.
 router.post(
   "/login-shop",
   catchAsyncErrors(async (req, res, next) => {
@@ -146,6 +149,7 @@ router.post(
 );
 
 // load shop
+// Xử lý yêu cầu GET để lấy thông tin về cửa hàng hiện tại. Nó sử dụng middleware isSeller để xác thực người dùng và trả về thông tin cửa hàng nếu xác thực thành công.
 router.get(
   "/getSeller",
   isSeller,
@@ -168,6 +172,7 @@ router.get(
 );
 
 // log out from shop
+// Xử lý yêu cầu GET để đăng xuất khỏi cửa hàng. Nó xóa cookie chứa mã thông báo truy cập và trả về một thông báo thành công.
 router.get(
   "/logout",
   catchAsyncErrors(async (req, res, next) => {
@@ -187,6 +192,7 @@ router.get(
 );
 
 // get shop info
+// Xử lý yêu cầu GET để lấy thông tin về một cửa hàng cụ thể dựa trên id của cửa hàng. Nó truy vấn cơ sở dữ liệu để tìm cửa hàng và trả về thông tin cửa hàng nếu tìm thấy.
 router.get(
   "/get-shop-info/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -203,6 +209,7 @@ router.get(
 );
 
 // update shop profile picture
+// Xử lý yêu cầu PUT để cập nhật hình đại diện của cửa hàng. Nó sử dụng middleware isSeller để xác thực người dùng và multer middleware để tải lên tệp hình ảnh mới. Nó xóa hình đại diện cũ của cửa hàng, cập nhật đường dẫn mới và trả về thông tin cửa hàng sau khi cập nhật.
 router.put(
   "/update-shop-avatar",
   isSeller,
@@ -232,6 +239,7 @@ router.put(
 );
 
 // update seller info
+// Xử lý yêu cầu PUT để cập nhật thông tin của cửa hàng. Nó sử dụng middleware isSeller để xác thực người dùng và cập nhật thông tin của cửa hàng trong cơ sở dữ liệu. Sau khi cập nhật thành công, nó trả về thông tin cửa hàng đã được cập nhật.
 router.put(
   "/update-seller-info",
   isSeller,
@@ -264,6 +272,7 @@ router.put(
 );
 
 // all sellers --- for admin
+// Xử lý yêu cầu GET để lấy thông tin về tất cả các cửa hàng (dành cho quản trị viên). Nó sử dụng middleware isAuthenticated và isAdmin để xác thực quyền truy cập của người dùng và trả về thông tin về tất cả các cửa hàng.
 router.get(
   "/admin-all-sellers",
   isAuthenticated,
@@ -284,6 +293,7 @@ router.get(
 );
 
 // delete seller ---admin
+// Xử lý yêu cầu DELETE để xóa một cửa hàng cụ thể (dành cho quản trị viên). Nó sử dụng middleware isAuthenticated và isAdmin để xác thực quyền truy cập của người dùng và xóa cửa hàng từ cơ sở dữ liệu.
 router.delete(
   "/delete-seller/:id",
   isAuthenticated,
@@ -311,6 +321,7 @@ router.delete(
 );
 
 // update seller withdraw methods --- sellers
+// Xử lý yêu cầu PUT để cập nhật phương thức rút tiền của cửa hàng. Nó sử dụng middleware isSeller để xác thực người dùng và cập nhật phương thức rút tiền trong cơ sở dữ liệu.
 router.put(
   "/update-payment-methods",
   isSeller,
@@ -333,6 +344,7 @@ router.put(
 );
 
 // delete seller withdraw merthods --- only seller
+// Xử lý yêu cầu DELETE để xóa phương thức rút tiền của cửa hàng (chỉ dành cho người bán hàng). Nó sử dụng middleware isSeller để xác thực người dùng và xóa phương thức rút tiền từ cửa hàng trong cơ sở dữ liệu.
 router.delete(
   "/delete-withdraw-method/",
   isSeller,

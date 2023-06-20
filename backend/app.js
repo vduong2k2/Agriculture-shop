@@ -6,16 +6,20 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 
+//Thiết lập CORS để cho phép truy cập từ trang web có nguồn gốc từ "http://localhost:3000".
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
-
+//Middleware để phân tích nội dung JSON trong yêu cầu.
 app.use(express.json());
+//Middleware để phân tích các cookies trong yêu cầu.
 app.use(cookieParser());
+//Middleware để phục vụ các tệp tĩnh từ thư mục "./uploads".
 app.use("/", express.static(path.join(__dirname, "./uploads")));
+//Middleware để phân tích nội dung yêu cầu x-www-form-urlencoded.
 app.use("/test", (req, res) => {
   res.send("Hello world!");
 });

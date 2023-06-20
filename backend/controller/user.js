@@ -11,6 +11,7 @@ const sendMail = require("../utils/sendMail");
 const sendToken = require("../utils/jwtToken");
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
+// Xử lý yêu cầu POST để tạo người dùng mới. Nó sử dụng middleware upload để tải lên tệp hình ảnh. Sau đó, nó kiểm tra xem người dùng đã tồn tại trong cơ sở dữ liệu chưa. Nếu người dùng đã tồn tại, nó sẽ xóa tệp hình ảnh vừa tải lên và trả về lỗi. Nếu người dùng chưa tồn tại, nó sẽ tạo một mã thông báo kích hoạt và gửi email xác nhận đến người dùng.
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
@@ -68,6 +69,7 @@ const createActivationToken = (user) => {
 };
 
 // activate user
+// Xử lý yêu cầu POST để kích hoạt người dùng sau khi nhận được mã thông báo kích hoạt. Nó xác thực mã thông báo, kiểm tra xem người dùng đã tồn tại chưa, và sau đó tạo người dùng mới trong cơ sở dữ liệu.
 router.post(
   "/activation",
   catchAsyncErrors(async (req, res, next) => {
@@ -104,6 +106,7 @@ router.post(
 );
 
 // login user
+// Xử lý yêu cầu POST để xác thực người dùng khi đăng nhập. Nó kiểm tra xem người dùng có tồn tại trong cơ sở dữ liệu không, sau đó so sánh mật khẩu được cung cấp với mật khẩu đã lưu trữ. Nếu thông tin đăng nhập hợp lệ, nó gửi mã thông báo truy cập đến người dùng.
 router.post(
   "/login-user",
   catchAsyncErrors(async (req, res, next) => {
@@ -136,6 +139,7 @@ router.post(
 );
 
 // load user
+//  Xử lý yêu cầu GET để lấy thông tin người dùng đã xác thực. Nó sử dụng middleware isAuthenticated để xác thực người dùng và trả về thông tin người dùng.
 router.get(
   "/getuser",
   isAuthenticated,
@@ -158,6 +162,7 @@ router.get(
 );
 
 // log out user
+// Xử lý yêu cầu GET để đăng xuất người dùng. Nó xóa cookie chứa mã thông báo truy cập.
 router.get(
   "/logout",
   catchAsyncErrors(async (req, res, next) => {
@@ -177,6 +182,7 @@ router.get(
 );
 
 // update user info
+// Xử lý yêu cầu PUT để cập nhật thông tin người dùng. Nó sử dụng middleware isAuthenticated để xác thực người dùng, sau đó cập nhật thông tin người dùng trong cơ sở dữ liệu.
 router.put(
   "/update-user-info",
   isAuthenticated,
@@ -215,6 +221,7 @@ router.put(
 );
 
 // update user avatar
+// Xử lý yêu cầu PUT để cập nhật hình đại diện của người dùng. Nó sử dụng middleware isAuthenticated và upload để xác thực người dùng và tải lên tệp hình ảnh mới. Nó xóa hình đại diện cũ của người dùng, cập nhật đường dẫn mới và trả về thông tin người dùng sau khi cập nhật.
 router.put(
   "/update-avatar",
   isAuthenticated,
@@ -244,6 +251,7 @@ router.put(
 );
 
 // update user addresses
+// Xử lý yêu cầu PUT để cập nhật địa chỉ của người dùng. Nó sử dụng middleware isAuthenticated để xác thực người dùng. Nếu địa chỉ cùng loại đã tồn tại, nó trả về lỗi. Nếu địa chỉ đã tồn tại, nó cập nhật thông tin địa chỉ. Nếu địa chỉ mới, nó thêm địa chỉ vào mảng địa chỉ của người dùng.
 router.put(
   "/update-user-addresses",
   isAuthenticated,
@@ -284,6 +292,7 @@ router.put(
 );
 
 // delete user address
+// Xử lý yêu cầu DELETE để xóa địa chỉ của người dùng. Nó sử dụng middleware isAuthenticated để xác thực người dùng và xóa địa chỉ dựa trên ID được cung cấp.
 router.delete(
   "/delete-user-address/:id",
   isAuthenticated,
@@ -311,6 +320,7 @@ router.delete(
 );
 
 // update user password
+// Xử lý yêu cầu PUT để cập nhật mật khẩu của người dùng. Nó sử dụng middleware isAuthenticated để xác thực người dùng và kiểm tra mật khẩu cũ. Nếu mật khẩu cũ không khớp hoặc mật khẩu mới không khớp với xác nhận mật khẩu, nó trả về lỗi. Nếu thông tin hợp lệ, nó cập nhật mật khẩu và trả về thông báo thành công.
 router.put(
   "/update-user-password",
   isAuthenticated,
@@ -346,6 +356,7 @@ router.put(
 );
 
 // find user infoormation with the userId
+// Xử lý yêu cầu GET để lấy thông tin người dùng dựa trên ID được cung cấp.
 router.get(
   "/user-info/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -363,6 +374,7 @@ router.get(
 );
 
 // all users --- for admin
+//  Xử lý yêu cầu GET để lấy danh sách tất cả người dùng. Nó sử dụng middleware isAuthenticated và isAdmin để xác thực và kiểm tra vai trò của người dùng. Nếu người dùng không phải là quản trị viên, nó trả về lỗi. Nếu người dùng là quản trị viên, nó trả về danh sách tất cả người dùng.
 router.get(
   "/admin-all-users",
   isAuthenticated,
@@ -383,6 +395,7 @@ router.get(
 );
 
 // delete users --- admin
+// Xử lý yêu cầu DELETE để xóa người dùng dựa trên ID được cung cấp. Nó sử dụng middleware isAuthenticated và isAdmin để xác thực và kiểm tra vai trò của người dùng. Nếu người dùng không phải là quản trị viên, nó trả về lỗi. Nếu người dùng là quản trị viên, nó xóa người dùng và trả về thông báo thành công.
 router.delete(
   "/delete-user/:id",
   isAuthenticated,
