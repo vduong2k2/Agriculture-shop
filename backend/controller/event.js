@@ -9,6 +9,7 @@ const router = express.Router();
 const fs = require("fs");
 
 // create event
+// Route handler xử lý yêu cầu POST để tạo sự kiện mới. Nó xử lý việc upload hình ảnh sự kiện, kiểm tra xem shopId có hợp lệ hay không, và sau đó tạo sự kiện mới trong cơ sở dữ liệu.
 router.post(
   "/create-event",
   upload.array("images"),
@@ -40,6 +41,7 @@ router.post(
 );
 
 // get all events
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các sự kiện.
 router.get("/get-all-events", async (req, res, next) => {
   try {
     const events = await Event.find();
@@ -53,6 +55,7 @@ router.get("/get-all-events", async (req, res, next) => {
 });
 
 // get all events of a shop
+// Route handler xử lý yêu cầu GET để lấy danh sách sự kiện của một cửa hàng cụ thể.
 router.get(
   "/get-all-events/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -70,6 +73,7 @@ router.get(
 );
 
 // delete event of a shop
+// Route handler xử lý yêu cầu DELETE để xóa một sự kiện của một cửa hàng. Trước khi xóa, nó cũng xóa các hình ảnh liên quan đến sự kiện.
 router.delete(
   "/delete-shop-event/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -106,6 +110,7 @@ router.delete(
 );
 
 // all events --- for admin
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các sự kiện cho quản trị viên.
 router.get(
   "/admin-all-events",
   isAuthenticated,

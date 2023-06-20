@@ -1,5 +1,5 @@
 const ErrorHandler = require("../utils/ErrorHandler");
-
+// sử dụng để xử lý các lỗi xảy ra trong ứng dụng.
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal server Error";

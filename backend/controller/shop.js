@@ -13,6 +13,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
 
 // create shop
+// Xử lý yêu cầu POST để tạo cửa hàng mới. Nó sử dụng multer middleware để tải lên tệp hình ảnh của cửa hàng. Sau đó, nó kiểm tra xem có người dùng đã sử dụng địa chỉ email này để đăng ký cửa hàng trước đó chưa. Nếu có, nó trả về một lỗi. Nếu không, nó lưu thông tin cửa hàng (bao gồm hình ảnh) vào cơ sở dữ liệu và gửi một email chứa liên kết kích hoạt để người dùng kích hoạt cửa hàng.
 router.post("/create-shop", upload.single("file"), async (req, res, next) => {
   try {
     const { email } = req.body;

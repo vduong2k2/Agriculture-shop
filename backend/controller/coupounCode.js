@@ -7,6 +7,7 @@ const CoupounCode = require("../model/coupounCode");
 const router = express.Router();
 
 // create coupoun code
+// Route handler xử lý yêu cầu POST để tạo mã giảm giá mới. Trước khi tạo, nó kiểm tra xem mã giảm giá đã tồn tại hay chưa. Nếu đã tồn tại, nó trả về một lỗi. Nếu chưa tồn tại, nó tạo mã giảm giá mới và trả về kết quả thành công.
 router.post(
   "/create-coupon-code",
   isSeller,
@@ -33,6 +34,7 @@ router.post(
 );
 
 // get all coupons of a shop
+// Route handler xử lý yêu cầu GET để lấy danh sách mã giảm giá của một cửa hàng cụ thể. Nó truy vấn và trả về danh sách mã giảm giá của cửa hàng.
 router.get(
   "/get-coupon/:id",
   isSeller,
@@ -50,6 +52,7 @@ router.get(
 );
 
 // delete coupoun code of a shop
+// Route handler xử lý yêu cầu DELETE để xóa một mã giảm giá của một cửa hàng. Nếu mã giảm giá không tồn tại, nó trả về một lỗi. Nếu tồn tại, nó xóa mã giảm giá và trả về thông báo thành công.
 router.delete(
   "/delete-coupon/:id",
   isSeller,
@@ -71,6 +74,7 @@ router.delete(
 );
 
 // get coupon code value by its name
+// Route handler xử lý yêu cầu GET để lấy giá trị của một mã giảm giá dựa trên tên của nó. Nó truy vấn và trả về giá trị của mã giảm giá.
 router.get(
   "/get-coupon-value/:name",
   catchAsyncErrors(async (req, res, next) => {

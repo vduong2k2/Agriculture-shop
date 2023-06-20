@@ -7,6 +7,7 @@ const { upload } = require("../multer");
 const router = express.Router();
 
 // create new message
+// Route handler xử lý yêu cầu POST để tạo một tin nhắn mới. Nó xử lý việc tải lên hình ảnh (nếu có), lấy dữ liệu tin nhắn từ yêu cầu và tạo một tin nhắn mới trong cơ sở dữ liệu.
 router.post(
   "/create-new-message",
   upload.single("images"),
@@ -44,6 +45,7 @@ router.post(
 );
 
 // get all messages with conversation id
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các tin nhắn với một conversationId cụ thể
 router.get(
   "/get-all-messages/:id",
   catchAsyncErrors(async (req, res, next) => {

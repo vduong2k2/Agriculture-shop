@@ -8,6 +8,7 @@ const Shop = require("../model/shop");
 const Product = require("../model/product");
 
 // create new order
+// Route handler xử lý yêu cầu POST để tạo một đơn hàng mới. Nó nhận thông tin về giỏ hàng, địa chỉ giao hàng, người dùng, tổng giá trị và thông tin thanh toán từ yêu cầu và tạo một đơn hàng mới trong cơ sở dữ liệu.
 router.post(
   "/create-order",
   catchAsyncErrors(async (req, res, next) => {
@@ -50,6 +51,7 @@ router.post(
 );
 
 // get all orders of user
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các đơn hàng của một người dùng cụ thể.
 router.get(
   "/get-all-orders/:userId",
   catchAsyncErrors(async (req, res, next) => {
@@ -69,6 +71,7 @@ router.get(
 );
 
 // get all orders of seller
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các đơn hàng của một người bán cụ thể.
 router.get(
   "/get-seller-all-orders/:shopId",
   catchAsyncErrors(async (req, res, next) => {
@@ -90,6 +93,7 @@ router.get(
 );
 
 // update order status for seller
+// Route handler xử lý yêu cầu PUT để cập nhật trạng thái của một đơn hàng dành cho người bán. Nó kiểm tra trạng thái yêu cầu từ người dùng và thực hiện các hành động tương ứng như cập nhật trạng thái đơn hàng, cập nhật số lượng sản phẩm và cập nhật thông tin người bán.
 router.put(
   "/update-order-status/:id",
   isSeller,
@@ -145,6 +149,7 @@ router.put(
 );
 
 // give a refund ----- user
+// Route handler xử lý yêu cầu PUT để yêu cầu hoàn tiền một đơn hàng từ phía người dùng.
 router.put(
   "/order-refund/:id",
   catchAsyncErrors(async (req, res, next) => {
@@ -171,6 +176,7 @@ router.put(
 );
 
 // accept the refund ---- seller
+// Route handler xử lý yêu cầu PUT để xác nhận hoàn tiền một đơn hàng từ phía người bán. Nó thực hiện các hành động tương ứng như cập nhật trạng thái đơn hàng, cập nhật số lượng sản phẩm và cập nhật thông tin người bán.
 router.put(
   "/order-refund-success/:id",
   isSeller,
@@ -212,6 +218,7 @@ router.put(
 );
 
 // all orders --- for admin
+// Route handler xử lý yêu cầu GET để lấy danh sách tất cả các đơn hàng cho quản trị viên.
 router.get(
   "/admin-all-orders",
   isAuthenticated,

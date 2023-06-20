@@ -6,6 +6,7 @@ const { isSeller, isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 
 // create a new conversation
+// Nó sử dụng middleware catchAsyncErrors để bắt lỗi bất đồng bộ trong quá trình xử lý. Bên trong callback, có code để tạo cuộc trò chuyện mới.
 router.post(
   "/create-new-conversation",
   catchAsyncErrors(async (req, res, next) => {
@@ -38,6 +39,7 @@ router.post(
 );
 
 // get seller conversations
+// Nó sử dụng middleware isSeller để xác thực người bán và middleware catchAsyncErrors để bắt lỗi bất đồng bộ. Bên trong callback, có code để lấy danh sách cuộc trò chuyện của người bán.
 router.get(
   "/get-all-conversation-seller/:id",
   isSeller,
@@ -59,8 +61,8 @@ router.get(
   })
 );
 
-
 // get user conversations
+// Nó sử dụng middleware isAuthenticated để xác thực người dùng đã đăng nhập và middleware catchAsyncErrors để bắt lỗi bất đồng bộ. Bên trong callback, có code để lấy danh sách cuộc trò chuyện của người dùng.
 router.get(
   "/get-all-conversation-user/:id",
   isAuthenticated,
@@ -83,6 +85,7 @@ router.get(
 );
 
 // update the last message
+// Nó sử dụng middleware catchAsyncErrors để bắt lỗi bất đồng bộ. Bên trong callback, có code để cập nhật tin nhắn cuối cùng của cuộc trò chuyện.
 router.put(
   "/update-last-message/:id",
   catchAsyncErrors(async (req, res, next) => {

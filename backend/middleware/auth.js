@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/user");
 const Shop = require("../model/shop");
 
+
+// hàm middleware để xác thực người dùng đã đăng nhập.
 exports.isAuthenticated = catchAsyncErrors(async(req,res,next) => {
     const {token} = req.cookies;
 
@@ -18,7 +20,7 @@ exports.isAuthenticated = catchAsyncErrors(async(req,res,next) => {
     next();
 });
 
-
+// middleware để xác thực người bán.
 exports.isSeller = catchAsyncErrors(async(req,res,next) => {
     const {seller_token} = req.cookies;
     if(!seller_token){
@@ -32,7 +34,7 @@ exports.isSeller = catchAsyncErrors(async(req,res,next) => {
     next();
 });
 
-
+// middleware để xác thực quyền hạn của người dùng.
 exports.isAdmin = (...roles) => {
     return (req,res,next) => {
         if(!roles.includes(req.user.role)){
